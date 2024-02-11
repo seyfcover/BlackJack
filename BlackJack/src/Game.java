@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Game {
-    public String[] cards= {"1","2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+    public String[] cards= {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
     String[] table = new String[10];
     String[] player = new String[10];
     public int lenX = 2,lenY = 2;
@@ -10,15 +10,15 @@ public class Game {
 
     public String[] openTable()
     {
-        table[0] = cards[gameRand.nextInt(14)];
-        table[1] = cards[gameRand.nextInt(14)];
+        table[0] = cards[gameRand.nextInt(13)];
+        table[1] = cards[gameRand.nextInt(13)];
         return table;
     }
 
     public String[] openPlayer()
     {
-        player[0] = cards[gameRand.nextInt(14)];
-        player[1] = cards[gameRand.nextInt(14)];
+        player[0] = cards[gameRand.nextInt(13)];
+        player[1] = cards[gameRand.nextInt(13)];
         return player;
     }
 
@@ -46,13 +46,13 @@ public class Game {
 
     public void hit(Player Y)
     {
-        Y.updateList(cards[gameRand.nextInt(14)],lenY);
+        Y.updateList(cards[gameRand.nextInt(13)],lenY);
         lenY++;
     }
 
     public void hit(Table X)
     {
-        X.updateList(cards[gameRand.nextInt(14)],lenX);
+        X.updateList(cards[gameRand.nextInt(13)],lenX);
         lenX++;
     }
 }
