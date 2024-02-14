@@ -1,10 +1,10 @@
 public class Table {
-    private int cash = 2000000;
+    private int cash;
     private final String[] card;
 
-    public  Table(String [] card)
-    {
+    public Table(String[] card, int cash) {
         this.card = card;
+        this.cash = cash;
     }
 
     public int getCash() {
@@ -19,8 +19,7 @@ public class Table {
         return card;
     }
 
-    public void updateList(String hit, int index)
-    {
-        card[index]= hit;
+    public void updateList(String hit, int index) {
+        card[index] = hit;
     }
 }

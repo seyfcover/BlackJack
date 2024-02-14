@@ -1,15 +1,17 @@
 public class Player {
 
     private int cash;
-    private int win,lose;
+    private int win, lose;
     private final String[] card;
 
-    public Player(int cash, int win, int lose ,String[] card )
-    {
+    private final String[] splittedcard;
+
+    public Player(int cash, int win, int lose, String[] card, String[] splittedcard) {
         this.cash = cash;
         this.win = win;
         this.lose = lose;
         this.card = card;
+        this.splittedcard = splittedcard;
     }
 
     public int getCash() {
@@ -40,10 +42,15 @@ public class Player {
         return card;
     }
 
+    public String[] getSplittedcard() {
+        return splittedcard;
+    }
 
+    public void getSplittedcard(String hit, int index) {
+        splittedcard[index] = hit;
+    }
 
-    public void updateList(String hit, int index)
-    {
-        card[index]= hit;
+    public void updateList(String hit, int index) {
+        card[index] = hit;
     }
 }
