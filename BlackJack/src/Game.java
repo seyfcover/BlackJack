@@ -64,7 +64,7 @@ public class Game {
     }
 
     public void hitStripped(Player Z) {
-        Z.getSplittedcard(cards[gameRand.nextInt(13)], lenZ);
+        Z.updateSplittedcard(cards[gameRand.nextInt(13)], lenZ);
         lenZ++;
     }
 }

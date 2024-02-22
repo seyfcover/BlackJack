@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -6,7 +5,7 @@ import java.util.Scanner;
 public class Blackjack {
     static Game game1 = new Game();
     static Table table1 = new Table(game1.openTable(), 20000);
-    static Player player1 = new Player(100, 0, 0, game1.openPlayer(), game1.splitplayer());
+    static Player player1 = new Player(100, 0, 0, game1.splitplayer(), game1.openPlayer());
     static Scanner scan = new Scanner(System.in);
     static int betValue = 0;
     static int split = 0;
@@ -20,7 +19,7 @@ public class Blackjack {
     public static void reset() {
         game1 = new Game();
         table1 = new Table(game1.openTable(), table1.getCash());
-        player1 = new Player(player1.getCash(), player1.getWin(), player1.getLose(), game1.openPlayer(), game1.splitplayer());
+        player1 = new Player(player1.getCash(), player1.getWin(), player1.getLose(), game1.splitplayer(), game1.openPlayer());
         raise = true;
         splitOn = false;
         play();
@@ -42,9 +41,7 @@ public class Blackjack {
                 betValue = scan.nextInt();
             }
             start();
-            if (((game1.calcuteSum(player1.getCard(), game1.lenY) == 20) &&
-                    (!Objects.equals(player1.getCard()[0], "A") &&
-                            !Objects.equals(player1.getCard()[1], "A"))) || (Objects.equals(player1.getCard()[0], player1.getCard()[1]))) {
+            if (((game1.calcuteSum(player1.getCard(), game1.lenY) == 20) && (!Objects.equals(player1.getCard()[0], "A") && !Objects.equals(player1.getCard()[1], "A"))) || (Objects.equals(player1.getCard()[0], player1.getCard()[1]))) {
                 if (betValue <= (player1.getCash() / 2)) {
                     System.out.println("SPLIT ?");
                     split = scan.nextInt();
@@ -65,8 +62,7 @@ public class Blackjack {
                 System.out.println("HIT or STAY");
             }
             int answer;
-            if (!(splitOn && game1.calcuteSum(player1.getCard(), game1.lenY)==21))
-            {
+            if (!(splitOn && game1.calcuteSum(player1.getCard(), game1.lenY) == 21)) {
                 answer = scan.nextInt();
                 while (answer != 0) {
                     if (answer == 2) {
@@ -78,9 +74,8 @@ public class Blackjack {
                     hit();
                     if (game1.calcuteSum(player1.getCard(), game1.lenY) > 21) {
                         answer = 0;
-                    }
-                    else if (game1.calcuteSum(player1.getCard(), game1.lenY) == 21) {
-                        answer= 0;
+                    } else if (game1.calcuteSum(player1.getCard(), game1.lenY) == 21) {
+                        answer = 0;
 
                     } else {
                         System.out.println("HIT or STAY");
@@ -128,7 +123,7 @@ public class Blackjack {
 
     public static void split() {
         System.out.println("\n Splitting ...");
-        player1 = new Player(player1.getCash(), player1.getWin(), player1.getLose(), game1.firsthandPlayer(), game1.splitplayer());
+        player1 = new Player(player1.getCash(), player1.getWin(), player1.getLose(), game1.splitplayer(), game1.firsthandPlayer());
         System.out.println("PLAYER CARDS");
         System.out.println(player1.getCard()[0] + "," + player1.getCard()[1] + "   " + player1.getSplittedcard()[0] + "," + player1.getSplittedcard()[1]);
         System.out.println("Player's hand: \n1. Hand:" + game1.calcuteSum(player1.getCard(), game1.lenY) + "  2. Hand:" + game1.calcuteSum(player1.getSplittedcard(), game1.lenZ));
@@ -136,9 +131,7 @@ public class Blackjack {
 
     public static void hit() {
         game1.hit(player1);
-        Arrays.stream(player1.getCard())
-                .filter(Objects::nonNull)
-                .forEach(e -> System.out.print(e + " "));
+        Arrays.stream(player1.getCard()).filter(Objects::nonNull).forEach(e -> System.out.print(e + " "));
         int player = game1.calcuteSum(player1.getCard(), game1.lenY);
         if (player > 21) {
             System.out.println("\nBusted :" + player);
@@ -153,9 +146,7 @@ public class Blackjack {
 
     public static void sHit() {
         game1.hitStripped(player1);
-        Arrays.stream(player1.getSplittedcard())
-                .filter(Objects::nonNull)
-                .forEach(e -> System.out.print(e + " "));
+        Arrays.stream(player1.getSplittedcard()).filter(Objects::nonNull).forEach(e -> System.out.print(e + " "));
         int player = game1.calcuteSum(player1.getSplittedcard(), game1.lenZ);
         if (player > 21) {
             System.out.println("\nBusted :" + player);
@@ -172,9 +163,7 @@ public class Blackjack {
         while (game1.calcuteSum(table1.getCard(), game1.lenX) < 17) {
             game1.hit(table1);
         }
-        Arrays.stream(table1.getCard())
-                .filter(Objects::nonNull)
-                .forEach(e -> System.out.print(e + " "));
+        Arrays.stream(table1.getCard()).filter(Objects::nonNull).forEach(e -> System.out.print(e + " "));
 
         int table = game1.calcuteSum(table1.getCard(), game1.lenX);
         int player = game1.calcuteSum(player1.getCard(), game1.lenY);
